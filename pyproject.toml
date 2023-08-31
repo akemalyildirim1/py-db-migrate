@@ -1,0 +1,47 @@
+[project]
+name = "py-db-migrate"
+description = "Python database migration CLI tool."
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE.txt"}
+
+authors = [
+    { name = "akemalyildirim1", email = "akemalyildirim1@gmail.com" }
+]
+
+maintainers = [
+    { name = "akemalyildirim1", email = "akemalyildirim1@gmail.com" }
+]
+
+dependencies = [
+    "asyncpg",
+    "pydantic",
+    "overrides",
+]
+
+[project.optional-dependencies]
+dev = [
+    "coverage",
+    "pip-tools",
+    "pre-commit",
+    "pytest",
+    "pytest-asyncio",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+
+[tool.pydocstyle]
+convention = "google"
+ignore_decorators = "overrides"
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]
+ignore_missing_imports = true
+strict_optional = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
