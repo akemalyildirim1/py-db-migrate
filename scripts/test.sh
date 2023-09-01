@@ -3,4 +3,4 @@
 set -e
 set -x
 
-coverage run --source=src -m pytest -lv ${ARGS}
+coverage run -m pytest -lv ${ARGS}

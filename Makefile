@@ -16,7 +16,6 @@ install-dev:
 lint:
 	SKIP=no-commit-to-branch pre-commit run --all-files
 
-
 .PHONY: test
 test:
 ifeq ($(DB_HOST),localhost)
@@ -35,3 +34,7 @@ coverage:
 	@echo "Test coverage."
 	python -m coverage run --source=src -m pytest -lv ${ARGS}
 	python -m coverage report -m
+
+.PHONY: run
+run:
+	python src/main.py
