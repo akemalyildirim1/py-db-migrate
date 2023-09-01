@@ -15,8 +15,10 @@ maintainers = [
 ]
 
 dependencies = [
+    "aiofiles",
     "asyncpg",
     "pydantic",
+    "pyyaml",
     "overrides",
 ]
 
@@ -27,6 +29,8 @@ dev = [
     "pre-commit",
     "pytest",
     "pytest-asyncio",
+    "types-aiofiles",
+    "types-PyYAML",
 ]
 
 [tool.black]
@@ -45,3 +49,6 @@ strict_optional = false
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+
+[tool.setuptools]
+py-modules = ["src"]
