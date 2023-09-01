@@ -2,12 +2,14 @@
 import yaml
 import aiofiles.os
 from pathlib import Path
+from pydantic import validate_call
 from src.service.service import Service
 
 
 class Start(Service):
     """Start class."""
 
+    @validate_call
     async def __call__(self, path: Path) -> None:
         """Run main logic of the class.
 
@@ -30,6 +32,7 @@ class Start(Service):
         self.logger.info("Configuration file is created.")
 
     @staticmethod
+    @validate_call
     async def check_existence_of_file(path: Path) -> bool:
         """Check whether the given file exists or not.
 
@@ -42,6 +45,7 @@ class Start(Service):
         return await aiofiles.os.path.exists(path)
 
     @staticmethod
+    @validate_call
     def create_configuration_file(path: Path) -> None:
         """Create a configuration file.
 
