@@ -1,6 +1,6 @@
 """Test database init file."""
 
-from src.database import Sql
+from py_db_migrate.database import Sql
 
 
 class SqlConcrete(Sql):
