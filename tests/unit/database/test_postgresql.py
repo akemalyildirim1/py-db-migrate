@@ -1,6 +1,6 @@
 """Unit tests for postgresql class."""
 import pytest
-from src.database.postgresql import PSql
+from py_db_migrate.database.postgresql import PSql
 
 
 @pytest.fixture

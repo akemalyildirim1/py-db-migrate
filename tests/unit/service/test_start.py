@@ -5,7 +5,7 @@ import yaml
 from pathlib import Path
 
 from tests.conftest import use_temp_file  # noqa: F401
-from src.service.start import Start
+from py_db_migrate.service.start import Start
 
 
 @pytest.fixture
@@ -18,9 +18,10 @@ class TestStart:
         """
         Case: Config file doesn't exist. Create a new one.
         """
-        await start_service(Path("temp/config.yaml"))
+        path = Path(f"{use_temp_file}/config.yaml")
+        await start_service(path)
 
-        with open("./temp/config.yaml", mode="r") as file:
+        with open(path, mode="r") as file:
             content = yaml.load(file, Loader=yaml.FullLoader)
 
         assert all([key in content for key in ("database", "migration_directory")])
@@ -29,33 +30,24 @@ class TestStart:
         """
         Case: Config file exists. Do not do anything.
         """
-        async with aiofiles.open("temp/config.yaml", mode="w") as file:
-            await file.write("test")
-        await start_service(Path("temp/config.yaml"))
+        path = Path(f"{use_temp_file}/config.yaml")
 
-        async with aiofiles.open("temp/config.yaml", mode="r") as file:
+        async with aiofiles.open(path, mode="w") as file:
+            await file.write("test")
+        await start_service(path)
+
+        async with aiofiles.open(path, mode="r") as file:
             content = await file.read()
 
         assert content == "test"
 
 
-class TestCheckExistenceOfFile:
-    async def test_check_existence_of_file_true(self, start_service, use_temp_file):
-        async with aiofiles.open("temp/config.yaml", mode="w") as file:
-            await file.write("test")
-        result = await start_service.check_existence_of_file(Path("temp/config.yaml"))
-        assert result is True
-
-    async def test_check_existence_of_file_false(self, start_service):
-        result = await start_service.check_existence_of_file(Path("temp/config.yaml"))
-        assert result is False
-
-
 class TestCreateConfigurationFile:
     async def test_create_configuration_file(self, start_service, use_temp_file):
-        start_service.create_configuration_file(Path("./temp/config.yaml"))
+        path = Path(f"{use_temp_file}/config.yaml")
+        start_service.create_configuration_file(path)
 
-        with open("./temp/config.yaml", mode="r") as file:
+        with open(path, mode="r") as file:
             content = yaml.load(file, Loader=yaml.FullLoader)
 
         assert content["database"] == {
