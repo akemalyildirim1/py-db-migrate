@@ -1,8 +1,8 @@
 """Shared service objects."""
 from logging import Logger
 
-from src.logger import get_logger
-from src.service import ServiceABC
+from py_db_migrate.logger import get_logger
+from py_db_migrate.service import ServiceABC
 
 logger = get_logger()
 
