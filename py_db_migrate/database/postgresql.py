@@ -2,7 +2,7 @@
 from asyncpg import connect, Connection
 from overrides import override
 from pydantic import validate_call
-from src.database import Sql
+from py_db_migrate.database import Sql
 from typing import Any
 
 

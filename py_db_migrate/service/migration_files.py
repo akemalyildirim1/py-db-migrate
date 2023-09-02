@@ -1,11 +1,13 @@
 """Migration files service."""
+import aiofiles.os
 from aiofiles import open
 from datetime import datetime, timezone
 from pathlib import Path
 from pydantic import validate_call
 
 
-from src.service.service import Service
+from py_db_migrate.service.utils import check_existence_of_file
+from py_db_migrate.service.service import Service
 
 
 class MigrationFiles(Service):
@@ -27,7 +29,12 @@ class MigrationFiles(Service):
         """
         formatted_name: str = self.format_file_names(name=name)
 
+        if not (await check_existence_of_file(path=folder_path)):
+            await self.create_migration_folder(path=folder_path)
+            self.logger.info(f"{folder_path} folder is created.")
+
         await self.add_migration_files(folder_path=folder_path, name=formatted_name)
+        self.logger.info("New migration files are added.")
 
     @staticmethod
     @validate_call
@@ -59,3 +66,16 @@ class MigrationFiles(Service):
         now: datetime = datetime.now(tz=timezone.utc)
         formatted_datetime = now.strftime("%Y%m%d%H%M%S")
         return f"{formatted_datetime}-{name}"
+
+    @staticmethod
+    @validate_call
+    async def create_migration_folder(path: Path) -> None:
+        """Create a folder to store migration files.
+
+        Arguments:
+            path: Path of the new folder.
+
+        Returns:
+            None.
+        """
+        await aiofiles.os.mkdir(path=path, mode=0o755)

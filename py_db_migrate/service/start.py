@@ -1,9 +1,11 @@
 """Start Service."""
 import yaml
-import aiofiles.os
+
 from pathlib import Path
 from pydantic import validate_call
-from src.service.service import Service
+
+from py_db_migrate.service.utils import check_existence_of_file
+from py_db_migrate.service.service import Service
 
 
 class Start(Service):
@@ -22,7 +24,7 @@ class Start(Service):
         Returns:
             None.
         """
-        is_file_exist: bool = await self.check_existence_of_file(path=path)
+        is_file_exist: bool = await check_existence_of_file(path=path)
 
         if is_file_exist:
             self.logger.warning("Configuration file already existed.")
@@ -30,19 +32,6 @@ class Start(Service):
 
         self.create_configuration_file(path=path)
         self.logger.info("Configuration file is created.")
-
-    @staticmethod
-    @validate_call
-    async def check_existence_of_file(path: Path) -> bool:
-        """Check whether the given file exists or not.
-
-        Arguments:
-            path: Path of the file to search.
-
-        Returns:
-            True if file exists. Otherwise, False.
-        """
-        return await aiofiles.os.path.exists(path)
 
     @staticmethod
     @validate_call
