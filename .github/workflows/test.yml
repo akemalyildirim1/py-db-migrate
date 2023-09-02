@@ -41,17 +41,17 @@ jobs:
           path: ${{ env.pythonLocation }}
           key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-test
 
-      - name: Install Dev Dependencies
-        run: make install-dev
+      - name: Install poetry
+        run: pip install poetry
 
-      - name: Delete pre-commit
-        run: pre-commit uninstall
+      - name: Generate req.txt file.
+        run : poetry export -f requirements.txt --output requirements.txt --with dev
 
-#      - name: Check lint
-#        run: make lint
+      - name: Install dependencies.
+        run: pip install -r requirements.txt
 
-      - name: Run tests
-        run: make test
+      - name: Check lint
+        run: make lint
 
       - run: mkdir coverage
       - name: Test
