@@ -46,5 +46,11 @@ plugins = ["pydantic.mypy"]
 ignore_missing_imports = true
 strict_optional = false
 
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.0"
+tag_format = "$version"
+version_files = ["pyproject.toml"]
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
