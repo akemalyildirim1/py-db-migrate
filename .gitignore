@@ -161,3 +161,4 @@ cython_debug/
 
 py-db-migration.yaml
 pydbmigrations/
+requirements.txt
