@@ -35,12 +35,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: ${{ env.pythonLocation }}
-          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-test
-
       - name: Install poetry
         run: pip install poetry
 
@@ -54,6 +48,7 @@ jobs:
         run: make lint
 
       - run: mkdir coverage
+
       - name: Test
         run: bash scripts/test.sh
         env:
