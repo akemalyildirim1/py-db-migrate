@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "py-db-migrate"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["akemalyildirim1 <akemalyildirim1@gmail.com>"]
 readme = "README.md"
@@ -48,7 +48,7 @@ strict_optional = false
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.1.0"
+version = "0.2.0"
 tag_format = "$version"
 version_files = ["pyproject.toml"]
 
