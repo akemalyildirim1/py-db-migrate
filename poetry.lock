@@ -608,6 +608,16 @@ files = [
 plugins = ["importlib-metadata"]
 
 [[package]]
+name = "pypika"
+version = "0.48.9"
+description = "A SQL query builder API for Python"
+optional = false
+python-versions = "*"
+files = [
+    {file = "PyPika-0.48.9.tar.gz", hash = "sha256:838836a61747e7c8380cd1b7ff638694b7a7335345d0f559b04b2cd832ad5378"},
+]
+
+[[package]]
 name = "pytest"
 version = "7.4.1"
 description = "pytest: simple powerful testing with Python"
@@ -829,4 +839,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "4aab5fa76ca37b0d0aff8fa4cf99e41e219fc624aeef611a40857b6d2bc79bdc"
+content-hash = "f5cad1c9c8a3521d4068e4dd65ad6db5733e4890c22f5cdc6c375936e4a87dbd"
