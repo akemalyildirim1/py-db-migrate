@@ -10,6 +10,9 @@ class SqlConcrete(Sql):
     async def fetch(self, query):
         raise NotImplementedError
 
+    async def __call__(self):
+        raise NotImplementedError
+
 
 class TestSql:
     def test_sql(self):
@@ -17,15 +20,15 @@ class TestSql:
         Case: Try to instantiate a sql class.
         """
         sql_concrete_class = SqlConcrete(
-            database="postgres",
+            name="postgres",
             user="admin",
             password="password",
             host="database.service.com",
-            port="5432",
+            port=5432,
         )
 
-        assert sql_concrete_class.database == "postgres"
+        assert sql_concrete_class.name == "postgres"
         assert sql_concrete_class.user == "admin"
         assert sql_concrete_class.password == "password"
-        assert sql_concrete_class.port == "5432"
+        assert sql_concrete_class.port == 5432
         assert sql_concrete_class.host == "database.service.com"
