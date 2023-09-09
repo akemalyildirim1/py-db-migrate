@@ -1,6 +1,7 @@
 """Database module."""
 
 from abc import ABC, abstractmethod
+from contextlib import asynccontextmanager
 from pydantic import (
     BaseModel,
     Field,
@@ -13,7 +14,7 @@ class Sql(ABC, BaseModel):
     """Sql class.
 
     Attributes:
-        database: Database name.
+        name: Database name.
         user: The user of the database.
         password: The password of the database.
         port: The port number to connect database
@@ -24,10 +25,10 @@ class Sql(ABC, BaseModel):
         execute: Execute a query and don't return anything.
     """
 
-    database: str
+    name: str
     user: str
     password: str
-    port: str = Field(default="5432")
+    port: int = Field(default=5432)
     host: str = Field(default="localhost")
 
     @abstractmethod
@@ -52,4 +53,14 @@ class Sql(ABC, BaseModel):
 
         Returns:
             None.
+        """
+
+    @asynccontextmanager
+    @abstractmethod
+    @validate_call
+    async def __call__(self):
+        """Create a context manager.
+
+        Returns:
+            Connection to send queries to db.
         """
