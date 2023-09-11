@@ -1,3 +1,9 @@
+## 0.3.1 (2023-09-11)
+
+### Fix
+
+- **tag.yml**: fix tag release pipeline
+
 ## 0.3.0 (2023-09-11)
 
 ### Feat
