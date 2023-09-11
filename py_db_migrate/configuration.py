@@ -1,11 +1,11 @@
 """Configuration related objects."""
 import sys
-
-import yaml
 from functools import lru_cache
 from pathlib import Path
-from pydantic import BaseModel, ValidationError
 from typing import Any
+
+import yaml
+from pydantic import BaseModel, ValidationError
 
 from py_db_migrate.logger import get_logger
 

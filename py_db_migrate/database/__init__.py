@@ -2,12 +2,9 @@
 
 from abc import ABC, abstractmethod
 from contextlib import asynccontextmanager
-from pydantic import (
-    BaseModel,
-    Field,
-    validate_call,
-)
 from typing import Any
+
+from pydantic import BaseModel, Field, validate_call
 
 
 class Sql(ABC, BaseModel):

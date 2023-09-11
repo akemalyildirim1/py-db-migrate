@@ -1,10 +1,12 @@
 """Postgresql class."""
-from asyncpg import connect, Connection
 from contextlib import asynccontextmanager
+from typing import Any
+
+from asyncpg import connect, Connection
 from overrides import override
 from pydantic import validate_call
+
 from py_db_migrate.database import Sql
-from typing import Any
 
 
 class PSql(Sql):
