@@ -1,13 +1,101 @@
-# py-db-migrate
+# `py-db-migrate`
 
-[![coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg)](https://github.com/akemalyildirim1/py-db-migrate/actions)
+CLI migration tool for python.
 
+**Usage**:
 
-It will be a CLI app.
+```console
+$ py-db-migrate [OPTIONS] COMMAND [ARGS]...
+```
 
-Commands:
-* migrate (It will run the migrations (up))
-* up (Same with migrate)
-* down (Undo the last migrations...-down.sql)
-* create (It will create a migration file with the given name. For example, car-table is given, car-table-up.sql and car-table-down.sql will be created).
-* start (It will create a configuration file of the project. If it will exists, skip. do not overwrite)
+**Options**:
+
+* `--install-completion`: Install completion for the current shell.
+* `--show-completion`: Show completion for the current shell, to copy it or customize the installation.
+* `--help`: Show this message and exit.
+
+**Commands**:
+
+* `create`: Create a new sql file.
+* `down`: Delete the latest migration file by using...
+* `init`: Create an initial configuration file.
+* `start`: Create an initial configuration file.
+* `up`: Run the new migration files.
+
+## `py-db-migrate create`
+
+Create a new sql file.
+
+**Usage**:
+
+```console
+$ py-db-migrate create [OPTIONS] NAME
+```
+
+**Arguments**:
+
+* `NAME`: [required]
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+## `py-db-migrate down`
+
+Delete the latest migration file by using down file.
+
+**Usage**:
+
+```console
+$ py-db-migrate down [OPTIONS]
+```
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+## `py-db-migrate init`
+
+Create an initial configuration file.
+
+You need to update this configuration file.
+
+**Usage**:
+
+```console
+$ py-db-migrate init [OPTIONS]
+```
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+## `py-db-migrate start`
+
+Create an initial configuration file.
+
+You need to update this configuration file.
+
+**Usage**:
+
+```console
+$ py-db-migrate start [OPTIONS]
+```
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+## `py-db-migrate up`
+
+Run the new migration files.
+
+**Usage**:
+
+```console
+$ py-db-migrate up [OPTIONS]
+```
+
+**Options**:
+
+* `--help`: Show this message and exit.
