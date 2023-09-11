@@ -1,3 +1,15 @@
+## 0.3.0 (2023-09-11)
+
+### Feat
+
+- **main.py**: add down command to app
+- **service/migration_down**: add migration down service
+
+### Refactor
+
+- **database**: update import order
+- **service**: refactor service layer
+
 ## 0.2.0 (2023-09-09)
 
 ### Feat
