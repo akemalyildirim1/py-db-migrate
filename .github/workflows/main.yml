@@ -1,0 +1,27 @@
+---
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: ['**']
+
+permissions:
+      contents: read
+      packages: write
+      statuses: write
+
+concurrency:
+  group: main-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+    secrets:
+      ALI_SMOKESHOW_DOWNLOAD_ARTIFACTS: ${{ secrets.ALI_SMOKESHOW_DOWNLOAD_ARTIFACTS }}
+  tag-release:
+    if: github.ref == 'refs/heads/master'
+    needs: test
+    uses: ./.github/workflows/tag.yml
