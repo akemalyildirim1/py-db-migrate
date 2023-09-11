@@ -1,7 +1,11 @@
 ---
-name: Test
+name: Test Coverage
 
-on: push
+on:
+  workflow_call:
+    secrets:
+      ALI_SMOKESHOW_DOWNLOAD_ARTIFACTS:
+        required: true
 
 permissions:
       contents: read
