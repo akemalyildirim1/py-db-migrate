@@ -1,9 +1,14 @@
 [tool.poetry]
 name = "py-db-migrate"
 version = "0.3.0"
-description = ""
+description = "The CLI application for managing SQL migrations."
 authors = ["akemalyildirim1 <akemalyildirim1@gmail.com>"]
 readme = "README.md"
+repository = "https://github.com/akemalyildirim1/py-db-migrate"
+keywords = ["psql", "sql", "migration", "typer", "python"]
+
+[tool.poetry.urls]
+"Issue tracker" = "https://github.com/akemalyildirim1/py-db-migrate/issues"
 
 [tool.poetry.scripts]
 py-db-migrate = "py_db_migrate.main:app"

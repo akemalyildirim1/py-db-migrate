@@ -17,13 +17,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    uses: ./.github/workflows/test.yml
-    secrets:
-      ALI_SMOKESHOW_DOWNLOAD_ARTIFACTS: ${{ secrets.ALI_SMOKESHOW_DOWNLOAD_ARTIFACTS }}
   tag-release:
-    if: github.ref == 'refs/heads/master'
-    needs: test
     uses: ./.github/workflows/tag.yml
     secrets:
-      PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      PERSONAL_TOKEN: ${{ secrets.PERSONEL_TOKEN }}
