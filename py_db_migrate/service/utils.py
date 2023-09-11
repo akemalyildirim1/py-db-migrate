@@ -1,7 +1,7 @@
 """Utils functions of the service layer."""
-import aiofiles.os
-
 from pathlib import Path
+
+import aiofiles.os
 from pydantic import validate_call
 
 

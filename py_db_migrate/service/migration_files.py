@@ -1,13 +1,14 @@
 """Migration files service."""
-import aiofiles.os
-from aiofiles import open
 from datetime import datetime, timezone
 from pathlib import Path
+
+import aiofiles.os
+from aiofiles import open
 from pydantic import validate_call
 
+from py_db_migrate.service.service import Service
 
 from py_db_migrate.service.utils import check_existence_of_file
-from py_db_migrate.service.service import Service
 
 
 class MigrationFiles(Service):
