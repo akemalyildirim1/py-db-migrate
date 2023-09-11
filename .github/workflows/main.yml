@@ -25,3 +25,5 @@ jobs:
     if: github.ref == 'refs/heads/master'
     needs: test
     uses: ./.github/workflows/tag.yml
+    secrets:
+      PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
