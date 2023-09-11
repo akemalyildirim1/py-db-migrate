@@ -1,16 +1,19 @@
 """Main file."""
 import asyncio
-import typer
 
 from pathlib import Path
+
+import typer
 from typing_extensions import Annotated
 
 from py_db_migrate.configuration import Configuration, get_configuration
 from py_db_migrate.database.postgresql import PSql
 from py_db_migrate.logger import get_logger
-from py_db_migrate.service.start import Start
+from py_db_migrate.service.migration_down import MigrationDown
 from py_db_migrate.service.migration_files import MigrationFiles
-from py_db_migrate.service.migration import Migration
+from py_db_migrate.service.migration_up import MigrationUp
+from py_db_migrate.service.start import Start
+
 
 app = typer.Typer(help="Awesome CLI user manager.")
 
@@ -31,7 +34,7 @@ def start():
 
 
 @app.command("create")
-def create(name: Annotated[str, typer.Argument(help="Name of the SQL files.")]):
+def create(name: Annotated[str, typer.Argument(..., help="Name of the SQL files.")]):
     """Create a new sql file."""
     migration_files: MigrationFiles = MigrationFiles()
     configuration: Configuration = get_configuration(path=CONFIGURATION_FILE_PATH)
@@ -46,10 +49,28 @@ def migration_up():
     configuration: Configuration = get_configuration(path=CONFIGURATION_FILE_PATH)
     psql: PSql = PSql(**(configuration.database.model_dump()))
 
-    migration: Migration = Migration(database=psql)
+    migration_up: MigrationUp = MigrationUp(database=psql)
     try:
         asyncio.run(
-            migration(
+            migration_up(
+                migration_folder=Path(configuration.migration_directory),
+                migration_table="pydbmigration",
+            )
+        )
+    except Exception as e:
+        logger.critical(str(e))
+
+
+@app.command("down")
+def migration_down():
+    """Delete the latest migration file by using down file."""
+    configuration: Configuration = get_configuration(path=CONFIGURATION_FILE_PATH)
+    psql: PSql = PSql(**(configuration.database.model_dump()))
+
+    migration_down: MigrationDown = MigrationDown(database=psql)
+    try:
+        asyncio.run(
+            migration_down(
                 migration_folder=Path(configuration.migration_directory),
                 migration_table="pydbmigration",
             )
